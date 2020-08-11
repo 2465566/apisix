@@ -18,7 +18,10 @@ package = "apisix"
 version = "1.3-0"
 supported_platforms = {"linux", "macosx"}
 
-source = "/mnt/apisix"
+source = {
+    url = "git://github.com/apache/incubator-apisix",
+    tag = "1.3",
+}
 
 description = {
     summary = "Apache APISIX(incubating) is a cloud-native microservices API gateway, delivering the ultimate performance, security, open source and scalable platform for all your APIs and microservices.",

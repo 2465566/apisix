@@ -100,6 +100,24 @@ function _M.with_header()
     ngx.say("!")
 end
 
+function _M.mock_skywalking_v2_service_register()
+    ngx.say('[{"key":"APISIX","value":1}]')
+end
+
+function _M.mock_skywalking_v2_instance_register()
+    ngx.req.read_body()
+    local data = ngx.req.get_body_data()
+    data = json_decode(data)
+    local key = data['instances'][1]['instanceUUID']
+    local ret = {}
+    ret[1] = {key = key, value = 1}
+    ngx.say(json_encode(ret))
+end
+
+function _M.mock_skywalking_v2_instance_heartbeat()
+    ngx.say('ok')
+end
+
 function _M.mock_zipkin()
     ngx.req.read_body()
     local data = ngx.req.get_body_data()
