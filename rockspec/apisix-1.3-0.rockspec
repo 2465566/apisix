@@ -30,6 +30,7 @@ description = {
 }
 
 dependencies = {
+    "skywalking-nginx-lua-plugin = 1.0-0",
     "lua-resty-template = 1.9",
     "lua-resty-etcd = 0.9",
     "lua-resty-balancer = 0.02rc5",
@@ -50,8 +51,6 @@ dependencies = {
     "lua-resty-ipmatcher = 0.6",
     "lua-resty-kafka = 0.07",
     "lua-resty-logger-socket = 2.0-0",
-    "skywalking-nginx-lua-plugin = 1.0-0",
-
 }
 
 build = {
