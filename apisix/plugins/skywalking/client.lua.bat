@@ -50,6 +50,7 @@ local function register_service(conf)
                        endpoint .. '/v2/service/register', ", err: ", err)
 
     elseif res.status == 200 then
+        core.log.debug("skywalking service register response: ", res.body)
         local register_results = cjson.decode(res.body)
 
         for _, result in ipairs(register_results) do
@@ -212,12 +213,7 @@ function _M.heartbeat(conf)
     end
 
     local err
-	core.log.warn("ngx.worker.id:", ngx.worker.id())
-    local endpoint = conf.endpoint
-    local tracing_buffer = ngx.shared['skywalking-tracing-buffer']
-    local service_id = tracing_buffer:get(endpoint .. '_service_id')
-    --if ngx.worker.id() == 0 and not heartbeat_timer then
-    if not service_id and not heartbeat_timer then
+    if ngx.worker.id() == 0 and not heartbeat_timer then
         heartbeat_timer, err = core.timer.new("skywalking_heartbeat",
                                             sw_heartbeat,
                                             {check_interval = 3}
@@ -234,4 +230,3 @@ end -- do
 
 
 return _M
-
